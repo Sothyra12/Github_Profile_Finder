@@ -1,23 +1,30 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Github Profile Finder</title>
-  </head>
 
-  <body>
-    <main>
-      <input type="text" id="search_username" placeholder="Enter username..." />
-      <button id="btn">search</button>
-      <div id="github_avatar">Github Avatar</div>
-      <div id="personal_info">Name + Bio</div>
-      <div id="location">Location</div>
-      <div id="public_repo">Public Repos</div>
-      <div id="following">Follower + Following</div>
-      <div id="profile_url">Profile Url</div>
-    </main>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Github Profile Finder</title>
+</head>
+
+<body>
+  <main>
+    <input type="text" id="search_input" placeholder="Enter username..." />
+    <button id="btn">search</button>
+
+    <div id="container">
+      <img id="avatar" />
+      <h1 id="name"></h1>
+      <h2 id="bio"></h2>
+      <p id="location"></p>
+      <p id="public_repo"></p>
+      <p id="followers"></p>
+      <p id="following"></p>
+      <button id="url_btn"></button>
+    </div>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
