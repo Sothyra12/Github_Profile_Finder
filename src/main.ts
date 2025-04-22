@@ -1,18 +1,16 @@
 import "./style.css";
 
-const SEARCH_URL = import.meta.env.APIURL;
-const MY_PROFILE_URL = import.meta.env.MY_GITHUB_URL;
+const SEARCH_URL = "https://api.github.com/users"; //import.meta.env.APIURL;
+const MY_PROFILE_URL = "https://api.github.com/users/Sothyra12"; // import.meta.env.MY_GITHUB_URL;
 
 const searchInput = document.getElementById("search_input") as HTMLInputElement;
 const searchBtn = document.getElementById("btn") as HTMLButtonElement;
 
 const userContainer = document.getElementById("container") as HTMLDivElement;
 const avatarUrl = document.getElementById("avatar") as HTMLImageElement;
-const names = document.getElementById("name") as HTMLHeadElement;
+const names = document.getElementById("name") as HTMLHeadingElement;
 const bioDesc = document.getElementById("bio") as HTMLHeadingElement;
-const locationInfo = document.getElementById(
-    "location",
-) as HTMLParagraphElement;
+const locationInfo = document.getElementById("location") as HTMLParagraphElement;
 const pubRepos = document.getElementById("public_repo") as HTMLParagraphElement;
 const follower = document.getElementById("follower") as HTMLParagraphElement;
 const followings = document.getElementById("following") as HTMLParagraphElement;
@@ -24,13 +22,13 @@ const fetchMyUrl = async () => {
         const myData = await res.json();
 
         if (!myData || myData.length === 0) {
-            console.error("Sothyra12 not found!1");
+            console.error("Sothyra12 not found!");
             return;
         }
 
         displayUserInfo([myData]);
     } catch (err) {
-        console.error("Error: ", err);
+        console.log("Error: ", err);
     }
 };
 
@@ -47,7 +45,7 @@ type UserData = {
 
 const displayUserInfo = (userDataArr: UserData[]): void => {
     if (!userDataArr || userDataArr.length === 0) {
-        userContainer.innerHTML = "";
+        userContainer.innerHTML = " ";
         return;
     }
 
@@ -69,11 +67,11 @@ const displayUserInfo = (userDataArr: UserData[]): void => {
     pubRepos.textContent = public_repos.toString();
     follower.textContent = followers.toString();
     followings.textContent = following.toString();
-    profileUrlBtn.textContent = "View GitHub Profile";
     profileUrlBtn.onclick = () => window.open(html_url, "_blank");
 };
 
 const searchUserName = async () => {
+    
     const searchInputValue = searchInput.value.trim().toLowerCase();
     if (!searchInputValue) return `Please enter a valid username!`;
 
@@ -82,16 +80,18 @@ const searchUserName = async () => {
         if (!res.ok) throw new Error("Cannot fetch this username!");
 
         const userData = await res.json();
-        if (!userData) throw new Error("Invalid user data!");
+        if (!res.ok || "message" in userData) throw new Error(userData.message || "Unknown error msg.");
 
         displayUserInfo([userData]);
     } catch (err) {
-        alert("User with this username not found.");
+        console.log("User with this username not found.", err);
     }
 };
 
 searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") searchUserName();
 });
+
+searchBtn.addEventListener("click", searchUserName);
 
 window.addEventListener("DOMContentLoaded", fetchMyUrl);
