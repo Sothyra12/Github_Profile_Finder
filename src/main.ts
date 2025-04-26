@@ -1,4 +1,5 @@
-import "./style.css";
+import "./output.css";
+
 
 const SEARCH_URL = "https://api.github.com/users"; //import.meta.env.APIURL;
 const MY_PROFILE_URL = "https://api.github.com/users/Sothyra12"; // import.meta.env.MY_GITHUB_URL;
@@ -61,12 +62,12 @@ const displayUserInfo = (userDataArr: UserData[]): void => {
     } = userDataArr[0];
 
     if (avatarUrl) avatarUrl.src = avatar_url;
-    if (names) names.textContent = name || "No name found";
-    if (bioDesc) bioDesc.textContent = bio || "No bio yet!";
-    if (locationInfo) locationInfo.textContent = location || "Unknown location";
-    if (pubRepos) pubRepos.textContent = public_repos.toString();
-    if (follower) follower.textContent = followers.toString();
-    if (followings) followings.textContent = following.toString();
+    if (names) names.textContent = name ?? "No name found";
+    if (bioDesc) bioDesc.textContent = bio ?? "No bio yet!";
+    if (locationInfo) locationInfo.textContent = location ?? "Unknown location";
+    if (pubRepos) pubRepos.innerHTML = `Public Repo <br>${public_repos.toString() ?? "0"}`;
+    if (follower) follower.innerHTML = `Follower <br>${followers.toString() ?? "0"}`;
+    if (followings) followings.innerHTML = `Following <br>${following.toString() ?? "0"}`;
     if (profileUrlBtn) {
         profileUrlBtn.onclick = () => window.open(html_url, "_blank");
     }
@@ -90,7 +91,7 @@ const searchUserName = async () => {
     } catch (err) {
         console.log("Error: ", err);
         if (userContainer) {
-            userContainer.innerHTML = `<p class="error">User not found or an error occurred</p>`;
+            userContainer.innerHTML = `<p class="error">User not found or an error occurred.</p>`;
         }
     }
 };

@@ -1,27 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Github Profile Finder</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="./output.css" rel="stylesheet" />
   </head>
 
-  <body>
-    <main>
-      <input type="text" id="search_input" placeholder="Enter username..." />
-      <button id="btn">search username</button>
+  <body class="bg-[#E5D9F2] min-h-screen">
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <input
+            type="text"
+            id="search_input"
+            placeholder="Enter username..."
+            class="flex-1 px-4 py-2 rounded-lg border border-[#212121] focus:outline-none focus:border-black"
+          />
+          <button
+            id="btn"
+            class="bg-[#A594F9] text-white px-6 py-2 rounded-4xl hover:bg-[#CDC1FF] transition-colors"
+          >
+            Search
+          </button>
+        </div>
 
-      <div id="container">
-        <img id="avatar" />
-        <h1 id="name"></h1>
-        <h2 id="bio"></h2>
-        <p id="location"></p>
-        <p id="public_repo"></p>
-        <p id="followers"></p>
-        <p id="following"></p>
-        <button id="url_btn">Visit the Github</button>
+        <div id="container" class="bg-[#F5EFFF] rounded-xl shadow-lg p-6 space-y-4">
+          <img
+            id="avatar"
+            class="w-32 h-32 rounded-full mx-auto border-2 border-black"
+          />
+          <h1
+            id="name"
+            class="text-2xl font-bold text-center text-gray-800"
+          ></h1>
+          <h2 id="bio" class="text-gray-600 text-center"></h2>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-6"
+          >
+            <p
+              id="location"
+              class="text-sm text-gray-700 flex items-center justify-center bg-gray-50 p-2 rounded"
+            ></p>
+            <p
+              id="public_repo"
+              class="text-sm text-gray-700 flex items-center justify-center text-center bg-gray-50 p-2 rounded"
+            ></p>
+            <p
+              id="follower"
+              class="text-sm text-gray-700 flex items-center justify-center text-center bg-gray-50 p-2 rounded"
+            ></p>
+            <p
+              id="following"
+              class="text-sm text-gray-700 flex items-center justify-center text-center bg-gray-50 p-2 rounded"
+            ></p>
+          </div>
+
+          <button
+            id="url_btn"
+            class="w-full bg-[#A594F9] text-white px-6 py-2 rounded-lg hover:bg-[#CDC1FF] transition-colors"
+          >
+            Visit Github Profile
+          </button>
+        </div>
       </div>
     </main>
     <script type="module" src="/src/main.ts"></script>
