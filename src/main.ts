@@ -60,31 +60,38 @@ const displayUserInfo = (userDataArr: UserData[]): void => {
         following,
     } = userDataArr[0];
 
-    avatarUrl.src = avatar_url;
-    names.textContent = name || "No name found";
-    bioDesc.textContent = bio || "No bio yet!";
-    locationInfo.textContent = location || "Unknown location";
-    pubRepos.textContent = public_repos.toString();
-    follower.textContent = followers.toString();
-    followings.textContent = following.toString();
-    profileUrlBtn.onclick = () => window.open(html_url, "_blank");
+    if (avatarUrl) avatarUrl.src = avatar_url;
+    if (names) names.textContent = name || "No name found";
+    if (bioDesc) bioDesc.textContent = bio || "No bio yet!";
+    if (locationInfo) locationInfo.textContent = location || "Unknown location";
+    if (pubRepos) pubRepos.textContent = public_repos.toString();
+    if (follower) follower.textContent = followers.toString();
+    if (followings) followings.textContent = following.toString();
+    if (profileUrlBtn) {
+        profileUrlBtn.onclick = () => window.open(html_url, "_blank");
+    }
 };
 
 const searchUserName = async () => {
-    
     const searchInputValue = searchInput.value.trim().toLowerCase();
-    if (!searchInputValue) return `Please enter a valid username!`;
+    if (!searchInputValue) {
+        console.log("Please enter a valid username!");
+        return;
+    }
 
     try {
         const res = await fetch(`${SEARCH_URL}/${searchInputValue}`);
         if (!res.ok) throw new Error("Cannot fetch this username!");
 
         const userData = await res.json();
-        if (!res.ok || "message" in userData) throw new Error(userData.message || "Unknown error msg.");
+        if ("message" in userData) throw new Error(userData.message);
 
         displayUserInfo([userData]);
     } catch (err) {
-        console.log("User with this username not found.", err);
+        console.log("Error: ", err);
+        if (userContainer) {
+            userContainer.innerHTML = `<p class="error">User not found or an error occurred</p>`;
+        }
     }
 };
 
