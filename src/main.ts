@@ -76,7 +76,7 @@ const displayUserInfo = (userDataArr: UserData[]): void => {
 const searchUserName = async () => {
     const searchInputValue = searchInput.value.trim().toLowerCase();
     if (!searchInputValue) {
-        console.log("Please enter a valid username!");
+        fetchMyUrl();
         return;
     }
 
@@ -97,7 +97,9 @@ const searchUserName = async () => {
 };
 
 searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") searchUserName();
+    if (e.key === "Enter") {
+        searchUserName();
+    }
 });
 
 searchBtn.addEventListener("click", searchUserName);
