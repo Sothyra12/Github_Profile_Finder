@@ -30,7 +30,7 @@ Welcome to the **GitHub Profile Finder**! 🌟 A fun and easy web app where you 
 
 ## 📸 Screenshot (Coming Soon!)
 
-> _(Insert app's screenshot! 😄)_
+> _![alt text](<Screenshot 2025-04-26 at 8.34.53 in the evening.png>)_
 
 ---
 
